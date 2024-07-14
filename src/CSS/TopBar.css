@@ -1,0 +1,232 @@
+:root {
+   --primary-accent-color: #fd2ebc; 
+   --secondary-accent-color: #06fa8a; 
+ }
+
+.topBarBox {
+   height: 9vh;
+   width: 100vw;
+   background-color: #3F3F3F;
+   left: 0;
+   top: 0;
+}
+
+.menuLeft {
+   height: 100%;
+   width: auto;
+   display: flex;
+}
+
+.menuLeft .btn {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 180px;
+	font-size: 26px;
+   height: 100%;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+   font-family: "Comfortaa", sans-serif;
+}
+
+.menuLeft .btn p {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(65, 65, 65, 0.01);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 10px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	overflow: hidden;
+	color: #fff;
+	font-weight: 400px;
+	z-index: 1;
+	transition: 0.5s;
+	backdrop-filter: blur(15px);
+   user-select: none;
+}
+.menuLeft .btn:hover p {
+	letter-spacing: 2px;
+   color: #555;
+}
+.menuLeft .btn p::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0.02), transparent);
+	transform: skewX(45deg) translate(0);
+	transition: 0.5s;
+	filter: blur(0px);
+}
+.menuLeft .btn:hover p::before {
+	transform: skewX(45deg) translate(200px);
+}
+.menuLeft .btn::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	bottom: 50%;
+	width: 0px;
+	height: 0px;
+	border-radius: 10px;
+	transition: 0.1s;
+	transition-delay: 0.5;
+}
+.menuLeft .btn:hover::before /*redBlack them width 85%*/ {
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.menuLeft .btn::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	top: 50%;
+	width: 0px;
+	height: 0px;
+	border-radius: 10px;
+	transition: 0.1s;
+	transition-delay: 0.4;
+}
+.menuLeft .btn:hover::after /*redBlack them width 85%*/ {
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+.menuLeft .btn::before, /*chnage 1*/
+.menuLeft .btn::after {
+	background: var(--secondary-accent-color);
+	box-shadow: 0 0 7px var(--secondary-accent-color), 0 0 7px var(--secondary-accent-color), 0 0 7px var(--secondary-accent-color),
+		0 0 7px var(--secondary-accent-color);
+}
+
+.container {
+	width: 130px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.container .btn {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100px;
+	font-size: 20px;
+   height: 46px;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+   font-family: "Comfortaa", sans-serif;
+}
+.container .btn p {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(253, 46, 188, 0.7);
+	box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 10px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	overflow: hidden;
+	color: #fff;
+	font-weight: 400px;
+	z-index: 1;
+	transition: 0.5s;
+	backdrop-filter: blur(15px);
+}
+.container .btn:hover p {
+	letter-spacing: 2px;
+}
+.container .btn p::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+	transform: skewX(45deg) translate(0);
+	transition: 0.5s;
+	filter: blur(7px);
+}
+.container .btn:hover p::before {
+	transform: skewX(45deg) translate(200px);
+}
+.container .btn::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	bottom: 50%;
+	width: 1px;
+	height: 1px;
+	border-radius: 10px;
+	transition: 0.1s;
+	transition-delay: 0.5;
+}
+.container .btn:hover::before /*redBlack them width 85%*/ {
+	bottom: 50%;
+	height: 50%;
+	width: 85%;
+	border-radius: 100px;
+}
+
+.container .btn::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	top: 50%;
+	width: 1px;
+	height: 1px;
+	border-radius: 10px;
+	transition: 0.1s;
+	transition-delay: 0.5;
+}
+.container .btn:hover::after /*redBlack them width 85%*/ {
+	top: 50%;
+	height: 50%;
+	width: 85%;
+	border-radius: 30px;
+}
+.container .btn:nth-child(1)::before, /*chnage 1*/
+.container .btn:nth-child(1)::after {
+	background: var(--primary-accent-color);
+	box-shadow: 0 0 5px var(--primary-accent-color), 0 0 5px var(--primary-accent-color), 0 0 5px var(--primary-accent-color),
+		0 0 0px var(--primary-accent-color);
+}
+
+#link1 {
+   text-decoration: none;
+}
+
+#login:hover {
+   animation-name: logIn;
+   transform: scale(1.05);
+   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+}

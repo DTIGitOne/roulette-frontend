@@ -1,0 +1,10 @@
+:root {
+   --primary-accent-background-color: #414141; 
+   --secondary-accent-background-color: #2C2C2C; 
+ }
+ 
+ .backgroundRoulette {
+   width: 100vw;
+   height: 86vh;
+   background: linear-gradient(23deg, var(--primary-accent-background-color) 50%, var(--secondary-accent-background-color) 50%);
+ }

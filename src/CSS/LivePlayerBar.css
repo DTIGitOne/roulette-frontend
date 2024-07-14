@@ -1,0 +1,9 @@
+:root {
+   --primary-accent-livebox-color: #FD2EBC; 
+ }
+
+.LivePlayerBarBox {
+   height: 5vh;
+   width: 100vw;
+   background-color: var(--primary-accent-livebox-color);
+}
