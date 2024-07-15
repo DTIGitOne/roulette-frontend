@@ -12,6 +12,46 @@
    --deg2: 0deg;
 }
 
+.containter1 {
+   width: 370px;
+   height: 370px;
+}
+
+.circular-progress {
+   position: relative;
+   height: 100%;
+   width: 100%;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.textSpin {
+   z-index: 100;
+   font-size: 38px;
+   color: #fff;
+   font-family: "Comfortaa", sans-serif;
+}
+
+.value-container {
+   position: relative;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   font-size: 50px;
+   color: #fff;
+   z-index: 10;
+}
+
+.circular-progress::before {
+   content: "";
+   position: absolute;
+   height: 84%;
+   width: 84%;
+   background-color: #414141;
+   border-radius: 50%;
+}
+
 #box1 {
    display: flex;
    justify-content: center;
@@ -56,7 +96,7 @@
    border-radius: 50%;
    width: 582px;
    height: 582px;
-   border: 4px solid var(--primary-accent-color);
+   border: 4px solid transparent;
    z-index: 50;
    position: absolute;
 }
@@ -65,7 +105,7 @@
    border-radius: 50%;
    width: 468px;
    height: 468px;
-   border: 4px solid var(--primary-accent-color);
+   border: 4px solid #e7e7e7;
    z-index: 50;
    position: absolute;
 }
@@ -74,7 +114,7 @@
    border-radius: 50%;
    width: 374px;
    height: 374px;
-   border: 4px solid var(--primary-accent-color);
+   border: 4px solid #414141;
    z-index: 50;
    position: absolute;
 }
@@ -99,7 +139,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #000000 90%);
+   background: linear-gradient(to top, transparent 90%, #703D57 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -114,7 +154,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #eb1e1e 90%);
+   background: linear-gradient(to top, transparent 90%, #D9B8C4 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -130,7 +170,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #eb1e1e 90%);
+   background: linear-gradient(to top, transparent 90%, #E43F6F 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -146,7 +186,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #eb1e1e 90%);
+   background: linear-gradient(to top, transparent 90%, #FB62F6 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -162,7 +202,7 @@
    width: 8.3%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #06fa8a 90%);
+   background: linear-gradient(to top, transparent 90%, #05e67d 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
