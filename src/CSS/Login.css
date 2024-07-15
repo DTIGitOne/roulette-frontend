@@ -1,0 +1,23 @@
+.background2 {
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   background: linear-gradient(23deg, #414141 50%, transparent 50%);
+   z-index: 10;
+}
+
+.background11 {
+   z-index: 5;
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   background: linear-gradient(290deg,#06fa8a,#007bff, #fd2ebc);
+   background-size: 300% 300%;
+   animation: color 8.5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes color {
+   0% {background-position: 0 50%;}
+   50% {background-position: 100% 50%;}
+   100% {background-position: 0 50%;}
+}

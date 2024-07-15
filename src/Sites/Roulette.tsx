@@ -3,6 +3,7 @@ import TopBar from '../Components/TopBar';
 import LivePlayerBar from '../Components/LivePlayerBar';
 import { FC } from 'react';
 import RouletteWheel from '../Components/RouletteWheel';
+import NeonIcon from '../SVG/NeonSpin';
 
 const Roulette:FC = () => {
    return (
@@ -14,6 +15,7 @@ const Roulette:FC = () => {
           <RouletteWheel />
          </div>
          <div className=' h-full w-1/2'>
+         
          </div>
        </div>
       </>
