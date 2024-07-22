@@ -4,6 +4,8 @@ import NeonName from '../SVG/NeonName';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { loginUser } from '../Api/Api';
+import { CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: FC = () => {
    const [username, setUsername] = useState("");
@@ -11,13 +13,19 @@ const LoginPage: FC = () => {
    const [usernameError, setUsernameError] = useState("");
    const [passwordError, setPasswordError] = useState("");
    const [showPassword, setShowPassword] = useState(false);
+   const [loading, setLoading] = useState(false);
+
+   const navigate = useNavigate();
 
    const sendData = async () => {
+     setLoading(true);
      try {
        const response = await loginUser(username, password);
        console.log(response);
      } catch(e) {
-      console.log(e);
+       console.log(e);
+     } finally {
+       setLoading(false);
      }
    }
 
@@ -68,9 +76,13 @@ const LoginPage: FC = () => {
                      <div className='passwordErrorBox'>{passwordError}</div>
                   </div>
                   <div id='passwordBox' className="form-group">
-                     <button type="submit">Login</button>
+                     {loading ? <CircularProgress /> : <button type="submit">Login</button>}
                   </div>
                </form>
+               <span className='text-white mt-3 flex' style={{fontSize: "18px"}}>
+                  <span className=' select-none'>Dont have an account?</span>
+                  <button onClick={() => navigate('/Signup')} className=' ml-2' style={{color: "#007bff"}}>Sign up</button>
+               </span>
             </div>
          </div>
       </>

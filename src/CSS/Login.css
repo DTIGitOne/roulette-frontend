@@ -33,6 +33,7 @@
 .showPasswordButton {
    position: absolute;
    right: 0;
+   top: 11%;
 }
 
 .form-group {
@@ -83,11 +84,15 @@
 #passwordBox {
    padding: 5px;
    margin-top: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 #passwordBox button {
    background-color: #007bff;
    font-size: 23px;
+   width: 100%;
    padding: 3px;
    border-radius: 10px;
 }
