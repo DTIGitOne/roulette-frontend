@@ -1,7 +1,13 @@
 .cls-1 {
-   fill: none;
- }
+  fill: none;
+}
 
- .cls-2 {
-   fill: #231f20;
- }
+.cls-2 {
+  fill: #ffffff;
+}
+
+#Layer_2 {
+  display: inline;
+  height: 60px;
+  margin-bottom: 20px;
+}

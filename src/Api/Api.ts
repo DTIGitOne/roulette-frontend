@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "./axios"
 
 export const getWheelSpin = async (token:any) => {
@@ -14,3 +15,18 @@ export const getWheelSpin = async (token:any) => {
       console.log(e);
    }
 }
+
+export const loginUser = async (username: string, password: string) => {
+   try {
+      const response = await axiosInstance.post("/userLogin", {
+         name: username,
+         password: password,
+      });
+      
+      return response.data;
+   } catch (e) {
+      console.log(e);
+      throw e;
+   }
+}
+
