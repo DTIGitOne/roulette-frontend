@@ -6,6 +6,22 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { loginUser } from '../Api/Api';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+
+const options = [
+   { value: "01", label: '1' },
+   { value: '02', label: '2' },
+   { value: '03', label: '3' },
+   { value: '04', label: '4' },
+   { value: '05', label: '5' },
+   { value: '06', label: '6' },
+   { value: '07', label: '7' },
+   { value: '08', label: '8' },
+   { value: '09', label: '9' },
+   { value: '10', label: '10' },
+   { value: '11', label: '11' },
+   { value: '12', label: '12' }
+ ]
 
 const SignupPage:FC = () => {
    const [name, setName] = useState("");
@@ -93,6 +109,11 @@ const SignupPage:FC = () => {
                   <div className="form-group">
                      <input onChange={(e) => handleUsername(e.target.value)} value={username} type="text" id="username" placeholder='Username' name="username" />
                      <div className='passwordErrorBox'>{usernameError}</div>
+                  </div>
+                  <div className=" relative flex">
+                   <Select options={options} />
+                   <Select options={options} />
+                   <Select options={options} />
                   </div>
                   <div className="form-group">
                      <input onChange={(e) => handlePassword(e.target.value)} value={password} type={showPassword ? "text" : "password"} id="password" placeholder='Password' name="password" />
