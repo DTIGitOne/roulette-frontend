@@ -7,21 +7,7 @@ import { loginUser } from '../Api/Api';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-
-const options = [
-   { value: "01", label: '1' },
-   { value: '02', label: '2' },
-   { value: '03', label: '3' },
-   { value: '04', label: '4' },
-   { value: '05', label: '5' },
-   { value: '06', label: '6' },
-   { value: '07', label: '7' },
-   { value: '08', label: '8' },
-   { value: '09', label: '9' },
-   { value: '10', label: '10' },
-   { value: '11', label: '11' },
-   { value: '12', label: '12' }
- ]
+import SignDate from '../Components/SignDate';
 
 const SignupPage:FC = () => {
    const [name, setName] = useState("");
@@ -91,7 +77,7 @@ const SignupPage:FC = () => {
 
    return (
       <>
-       <div className='background11'></div>
+       <div className='background111'></div>
          <div className='background2 flex'>
             <div className='h-full w-full flex flex-col justify-center items-center'>
                <NeonName nameHeight={270} nameWidth={270} />
@@ -111,9 +97,7 @@ const SignupPage:FC = () => {
                      <div className='passwordErrorBox'>{usernameError}</div>
                   </div>
                   <div className=" relative flex">
-                   <Select options={options} />
-                   <Select options={options} />
-                   <Select options={options} />
+                   <SignDate />
                   </div>
                   <div className="form-group">
                      <input onChange={(e) => handlePassword(e.target.value)} value={password} type={showPassword ? "text" : "password"} id="password" placeholder='Password' name="password" />
