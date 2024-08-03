@@ -75,13 +75,13 @@ const LoginPage: FC = () => {
                      </button>
                      <div className='passwordErrorBox'>{passwordError}</div>
                   </div>
-                  <div id='passwordBox' className="form-group">
-                     {loading ? <CircularProgress /> : <button type="submit">Login</button>}
+                  <div id='passwordBox' className=" container2 form-group">
+                     {loading ? <CircularProgress /> : <button className='btn' type="submit"><p>Login</p></button>}
                   </div>
                </form>
-               <span className='text-white mt-3 flex' style={{fontSize: "18px"}}>
+               <span className=' text-white mt-3 flex' style={{fontSize: "18px"}}>
                   <span className=' select-none'>Dont have an account?</span>
-                  <button onClick={() => navigate('/Signup')} className=' ml-2' style={{color: "#007bff"}}>Sign up</button>
+                  <button id='signUpButton' onClick={() => navigate('/Signup')} className=' ml-2 '>Sign up</button>
                </span>
             </div>
          </div>

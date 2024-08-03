@@ -1,5 +1,8 @@
 import { FC, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
+import { RootState } from '../Interface/Interface';
+import { setDay, setMonth, setYear } from '../Redux/Slices/DateSlice';
 
 // Custom styles for react-select
 const customStyles = {
@@ -10,7 +13,8 @@ const customStyles = {
     fontSize: '15px',
     width: '100%',
     maxWidth: '100%',
-    minWidth: '100%'
+    minWidth: '100%',
+    cursor: 'pointer'
   }),
   control: (provided: any) => ({
     ...provided,
@@ -49,15 +53,21 @@ const yearOptions = Array.from({ length: currentYear - 1950 + 1 }, (_, i) => ({
 }));
 
 const SignDate: FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+
+  const dispatch = useDispatch();
+
+  const dateData = useSelector((state: RootState) => state.dateData);
+  
+  const daySel = dateData?.day;
+  const monthSel = dateData?.month;
+  const yearSel = dateData?.year;
+
   const [dayOptions, setDayOptions] = useState<{ value: string, label: string }[]>([]);
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
 
   // Generate day options based on the selected month and year
   useEffect(() => {
-    if (selectedMonth) {
-      const month = parseInt(selectedMonth, 10);
+    if (monthSel) {
+      const month = parseInt(monthSel, 10);
       const daysInMonth = new Date(2024, month, 0).getDate(); // Use a fixed year for day options
       const days = Array.from({ length: daysInMonth }, (_, i) => ({
         value: String(i + 1).padStart(2, '0'),
@@ -65,13 +75,13 @@ const SignDate: FC = () => {
       }));
       setDayOptions(days);
     }
-  }, [selectedMonth]);
+  }, [monthSel]);
 
   // Update day options when year changes
   useEffect(() => {
-    if (selectedMonth && selectedYear) {
-      const year = parseInt(selectedYear, 10);
-      const month = parseInt(selectedMonth, 10);
+    if (monthSel && yearSel) {
+      const year = parseInt(yearSel, 10);
+      const month = parseInt(monthSel, 10);
       const daysInMonth = new Date(year, month, 0).getDate(); // Get the last day of the month
       const days = Array.from({ length: daysInMonth }, (_, i) => ({
         value: String(i + 1).padStart(2, '0'),
@@ -79,41 +89,53 @@ const SignDate: FC = () => {
       }));
       setDayOptions(days);
     }
-  }, [selectedYear]);
+  }, [yearSel]);
+
+  const handleMonthChange = (option: any) => {
+    dispatch(setMonth(option ? option.value : null));
+  }
+
+  const handleDayChange = (option: any) => {
+    dispatch(setDay(option ? option.value : null));
+  }
+
+  const handleYearChange = (option: any) => {
+    dispatch(setYear(option ? option.value : null));
+  }
 
   return (
     <div className='w-full'>
       <form className='flex w-full justify-around' style={{ fontSize: "14px" }}>
         {/* Month Selector */}
         <div className="form-group p-2">
-          <label style={{ fontSize: "17px" }}>Month</label>
+          <label className=' mb-1' style={{ fontSize: "17px" }}>Month</label>
           <Select
             options={monthOptions}
             styles={customStyles}
-            onChange={option => setSelectedMonth(option ? option.value : null)}
+            onChange={option => handleMonthChange(option)}
             placeholder="MM"
           />
         </div>
 
         {/* Day Selector */}
         <div className="form-group p-2">
-          <label style={{ fontSize: "17px" }}>Day</label>
+          <label className=' mb-1' style={{ fontSize: "17px" }}>Day</label>
           <Select
             options={dayOptions}
             styles={customStyles}
-            onChange={option => setSelectedDay(option ? option.value : null)}
+            onChange={option => handleDayChange(option)}
             placeholder="DD"
-            isDisabled={!selectedMonth} // Disable until month is selected
+            isDisabled={!monthSel} // Disable until month is selected
           />
         </div>
 
         {/* Year Selector */}
         <div className="form-group p-2">
-          <label style={{ fontSize: "17px" }}>Year</label>
+          <label className=' mb-1' style={{ fontSize: "17px" }}>Year</label>
           <Select
             options={yearOptions}
             styles={customStyles}
-            onChange={option => setSelectedYear(option ? option.value : null)}
+            onChange={option => handleYearChange(option)}
             placeholder="YY"
           />
         </div>

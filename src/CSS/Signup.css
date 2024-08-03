@@ -1,0 +1,63 @@
+#SignupForm {
+   width: 440px;
+   height: auto;
+   padding: 2%;
+   background: rgba(255, 255, 255, 0.09);
+   backdrop-filter: blur(15px);
+   color: white;
+   border-radius: 15px;
+   border: 1px solid white;
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+
+#SignupForm label {
+    font-size: 20px;
+    font-weight: 200;
+ }
+ 
+ #SignupForm input {
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 20px;
+    padding: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+ }
+
+ #LoginButton {
+    color: #0f83ff;
+ }
+ 
+ #LoginButton:hover {
+    color: #1070d6;
+ }
+ 
+ #SignupForm input:focus {
+    outline: none;
+    border-color: #007bff;
+ }
+ 
+ #SignupForm input::placeholder {
+    color: #ffffff;
+    opacity: 0.35;
+ }
+
+ input {
+    background-color: transparent; /* Ensures the input background is transparent */
+  }
+  
+  input:-webkit-autofill {
+    background-color: transparent !important; /* Override browser autofill background */
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Ensures transparent background */
+    box-shadow: 0 0 0px 1000px transparent inset !important; /* For other browsers */
+    color: inherit !important; /* Ensures text color remains as specified */
+  }
+  
+  input:-webkit-autofill::first-line {
+    font-size: inherit; /* Ensures autofill text respects the input font size */
+    color: inherit !important; /* Ensures autofill text color remains as specified */
+  }
+ 

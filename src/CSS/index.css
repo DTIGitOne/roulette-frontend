@@ -15,3 +15,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input {
+  background-color: transparent;
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important; 
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important; 
+  color: inherit !important; 
+}
+
+input:-webkit-autofill::first-line {
+  font-size: inherit; 
+  color: inherit !important; 
+}
