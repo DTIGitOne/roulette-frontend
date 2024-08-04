@@ -16,10 +16,11 @@ const customStyles = {
     minWidth: '100%',
     cursor: 'pointer'
   }),
-  control: (provided: any) => ({
+  control: (provided: any, state: any) => ({
     ...provided,
     border: '1px solid white',
     boxShadow: 'none',
+    backgroundColor: state.isDisabled ? 'rgba(211, 211, 211, 0.5)' : 'white', // Change background when disabled
     '&:hover': {
       border: '1px solid #0056b3'
     },
@@ -106,17 +107,6 @@ const SignDate: FC = () => {
   return (
     <div className='w-full'>
       <form className='flex w-full justify-around' style={{ fontSize: "14px" }}>
-        {/* Month Selector */}
-        <div className="form-group p-2">
-          <label className=' mb-1' style={{ fontSize: "17px" }}>Month</label>
-          <Select
-            options={monthOptions}
-            styles={customStyles}
-            onChange={option => handleMonthChange(option)}
-            placeholder="MM"
-          />
-        </div>
-
         {/* Day Selector */}
         <div className="form-group p-2">
           <label className=' mb-1' style={{ fontSize: "17px" }}>Day</label>
@@ -128,7 +118,16 @@ const SignDate: FC = () => {
             isDisabled={!monthSel} // Disable until month is selected
           />
         </div>
-
+        {/* Month Selector */}
+        <div className="form-group p-2">
+          <label className=' mb-1' style={{ fontSize: "17px" }}>Month</label>
+          <Select
+            options={monthOptions}
+            styles={customStyles}
+            onChange={option => handleMonthChange(option)}
+            placeholder="MM"
+          />
+        </div>
         {/* Year Selector */}
         <div className="form-group p-2">
           <label className=' mb-1' style={{ fontSize: "17px" }}>Year</label>

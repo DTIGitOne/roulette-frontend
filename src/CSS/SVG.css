@@ -11,3 +11,26 @@
   height: 60px;
   margin-bottom: 20px;
 }
+
+.animated-bg {
+  width: 150%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  animation: moveBackground 50s linear infinite alternate-reverse;
+}
+
+.animated-bg svg {
+  position: absolute;
+  width: 150%; /* Increase size to make it larger than the viewport */
+  height: 150%;
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
+}

@@ -11,6 +11,7 @@ import SignDate from '../Components/SignDate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
 import { DateDataState } from '../Interface/Interface';
+import WavesBackground1 from '../SVG/WavesBackground1';
 
 const SignupPage:FC = () => {
 
@@ -112,9 +113,12 @@ const SignupPage:FC = () => {
 
    return (
       <>
-         <div className='background22 flex'>
+         <div className='background22 flex overflow-hidden'>
+         <div className='signUpBG1'>
+          <WavesBackground1 />
+         </div>
             <div className='h-full w-full flex flex-col justify-center items-center'>
-               <NeonName nameHeight={270} nameWidth={270} />
+               <NeonName nameHeight={280} nameWidth={280} />
                <form id='SignupForm' action="/login" method="POST" onSubmit={handleSubmit}>
                   <div className=' flex gap-7'>
                   <div className="form-group">
@@ -147,12 +151,12 @@ const SignupPage:FC = () => {
                   </div>
                   <div className="form-group">
                      <input onChange={(e) => handleRepeatPassword(e.target.value)} value={repeatPassword} type={showRepeatPassword ? "text" : "password"} id="passwordRepeat" placeholder='(Repeat) Password' />
-                     <button className='showPasswordButton' type="button" onClick={toggleShowRepeatPassword}>
+                     <button className='showPasswordButton2' type="button" onClick={toggleShowRepeatPassword}>
                         {showRepeatPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                      </button>
                      <div className='passwordErrorBox'>{repeatPasswordError}</div>
                   </div>
-                  <div id='passwordBox' className="form-group container2">
+                  <div id='passwordBox2' className="form-group container3">
                      {loading ? <CircularProgress /> : <button className='btn' type="submit"><p>Sign up</p></button>}
                   </div>
                </form>
