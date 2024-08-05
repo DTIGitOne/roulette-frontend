@@ -19,14 +19,33 @@ export const getWheelSpin = async (token:any) => {
 export const loginUser = async (username: string, password: string) => {
    try {
       const response = await axiosInstance.post("/userLogin", {
-         name: username,
+         username: username,
          password: password,
       });
       
-      return response.data;
+      return response;
    } catch (e) {
       console.log(e);
       throw e;
    }
 }
+
+export const SignupUser = async (username: string,firstname: String,surname: String,email: String, password: string,birthday: Date ) => {
+   try {
+      const response = await axiosInstance.post("/userSignup", {
+         username: username,
+         firstname: firstname,
+         surname: surname,
+         email: email,
+         password: password,
+         birthday: birthday
+      });
+      
+      return response;
+   } catch (e) {
+      console.log(e);
+      throw e;
+   }
+}
+
 

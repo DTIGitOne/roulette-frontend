@@ -83,6 +83,27 @@
    z-index: 20;
 }
 
+#picker {
+   background-color: #ffffff;
+   width: 50px;
+   height: 90px;
+   position: absolute;
+   z-index: 9999;
+   top: 0;
+   clip-path: polygon(50% 50%, 0 0, 100% 0);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#pickerLine {
+   background-color: #ffffff;
+   width: 3px;
+   height: 120px;
+   position: absolute;
+   z-index: 9999;
+}
+
 #border1Box {
    width: 100%;
    height: 100%;
@@ -139,7 +160,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #703D57 90%);
+   background: linear-gradient(to top, transparent 90%, rgba(112, 61, 87, 0.85) 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -154,7 +175,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #D9B8C4 90%);
+   background: linear-gradient(to top, transparent 90%, rgba(217, 184, 196, 0.85) 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -170,7 +191,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #E43F6F 90%);
+   background: linear-gradient(to top, transparent 90%, rgba(224, 42, 94, 0.85) 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -186,7 +207,7 @@
    width: 8%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #FB62F6 90%);
+   background: linear-gradient(to top, transparent 90%, rgba(196, 0, 214, 0.85) 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -202,7 +223,7 @@
    width: 8.3%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 90%, #05e67d 90%);
+   background: linear-gradient(to top, transparent 90%, rgba(5, 230, 125, 0.85) 90%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;

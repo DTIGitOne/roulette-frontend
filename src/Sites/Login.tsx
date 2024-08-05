@@ -21,7 +21,12 @@ const LoginPage: FC = () => {
      setLoading(true);
      try {
        const response = await loginUser(username, password);
-       console.log(response);
+
+       if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
+
+          navigate("/Roulette");
+       } 
      } catch(e) {
        console.log(e);
      } finally {

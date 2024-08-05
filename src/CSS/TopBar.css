@@ -6,7 +6,7 @@
 .topBarBox {
    height: 9vh;
    width: 100vw;
-   background-color: #3F3F3F;
+   background: linear-gradient(160deg,#2e2e2e 1%, #3F3F3F 100%);
    left: 0;
    top: 0;
 }

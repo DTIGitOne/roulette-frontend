@@ -57,6 +57,11 @@
    margin: 6px 0px;
 }
 
+.mClass {
+   width: 100%;
+   margin: 6px 0px;
+}
+
 #password {
    width: 100%;
    margin: 6px 0px;
@@ -104,8 +109,8 @@
 
 .passwordErrorBox {
    color: rgb(255, 56, 56);
-   font-size: 18px;
-   font-weight: 500;
+   font-size: 15px;
+   font-weight: 600;
    height: 24px;
    padding: 5px;
    padding-top: 1px;

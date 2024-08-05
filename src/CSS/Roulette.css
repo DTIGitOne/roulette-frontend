@@ -6,5 +6,5 @@
  .backgroundRoulette {
    width: 100vw;
    height: 86vh;
-   background: linear-gradient(23deg, var(--primary-accent-background-color) 50%, var(--secondary-accent-background-color) 50%);
+   background: linear-gradient(23deg,#272727 10%, var(--primary-accent-background-color) 50%, var(--secondary-accent-background-color) 50%);
  }
