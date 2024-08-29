@@ -28,7 +28,7 @@ const RouletteWheel: FC = () => {
     getSpin();
 
     let progressEndValue = 100;
-    let totalDuration = 25000; // Total duration in milliseconds
+    let totalDuration = 20000; // Total duration in milliseconds
     let steps = 1000; // Number of steps
 
     let interval = totalDuration / steps;

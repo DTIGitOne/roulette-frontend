@@ -14,16 +14,16 @@ const Roulette:FC = () => {
        <TopBar />
        <LivePlayerBar />
        <div className='backgroundRoulette flex'>
-         <div className=' h-full  flex justify-center items-center' style={{width: "46%"}}>
-          <RouletteWheel />
-         </div>
-         <div className=' flex justify-center items-center h-full p-3' style={{width: "54%"}}>
-          <div className=' h-full w-3/4 flex justify-center items-center'>
+         <div className=' h-full flex justify-center items-center p-10' style={{width: "85%"}}>
+          <div style={{width: "40%"}}>
            <PlaceBets />
           </div>
-          <div className=' h-full w-1/4'>
-           <LiveChat />
+          <div className=' pr-36 pt-9' style={{width: "60%", height: "100%"}}>
+           <RouletteWheel />
           </div>
+         </div>
+         <div className=' flex justify-center items-center h-full pb-3' style={{width: "15%"}}>
+           <LiveChat />
          </div>
        </div>
       </>

@@ -21,14 +21,16 @@
     height: 6%;
     display: flex;
     justify-content: center;
-    background-color: rgba(24, 24, 24, 0.7);
+    background: transparent;
     padding: 5px;
+    padding-left: 10px;
     border-radius: 0px 0px 10px 10px;
     gap: 5px;
 }
 
 #messageBox input {
     height: 80%;
+    width: 80%;
     color: white;
     border-bottom: 0.1px solid rgba(255, 255, 255, 0.45);
 }

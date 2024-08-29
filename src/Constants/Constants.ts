@@ -6,11 +6,11 @@ export const ROUTES = {
 };
 
 export const segments = [
-   "segmentE", "segmentA", "segmentB", "segmentA", "segmentC", "segmentA",
-   "segmentB", "segmentA", "segmentC", "segmentA", "segmentB", "segmentA",
-   "segmentD", "segmentA", "segmentB", "segmentA", "segmentC", "segmentA",
-   "segmentB", "segmentA", "segmentD", "segmentA", "segmentB", "segmentA",
-   "segmentC", "segmentA", "segmentB", "segmentA", "segmentD", "segmentA",
-   "segmentB", "segmentA", "segmentC", "segmentA", "segmentB", "segmentA",
-   "segmentC", "segmentA", "segmentB", "segmentA"
+   "segmentE", "segmentA", "segmentB", "segmentA", "segmentD", "segmentA",
+   "segmentB", "segmentA", "segmentB", "segmentA", "segmentD", "segmentA",
+   "segmentB", "segmentA", "segmentB", "segmentA", "segmentD", "segmentA",
+   "segmentB", "segmentA", "segmentB", "segmentA", "segmentB", "segmentA",
+   "segmentD", "segmentA", "segmentB", "segmentA", "segmentB", "segmentA",
+   "segmentD", "segmentA", "segmentB", "segmentA", "segmentB", "segmentA",
+   "segmentD", "segmentA", "segmentB", "segmentA"
  ];
