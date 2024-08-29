@@ -133,11 +133,8 @@ const RouletteWheel: FC = () => {
           ))}
         </div>
       </div>
-      <div id="picker">
-        <div className=" relative" style={{zIndex: "9999"}}>
-         <span id="pickerLine"></span>
-        </div>
-      </div>
+        <div id="picker"></div>
+        <span id="pickerLine"></span>
       <div id="rouletteWheel" ref={rouletteWheelRef}>
         {segments.map((segment, index) => (
           <div key={index} className={`segment ${segment}`} style={getRotationStyle(index)}></div>

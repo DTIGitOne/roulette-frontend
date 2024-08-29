@@ -1,10 +1,18 @@
 :root {
-   --primary-accent-livebox-color: #FD2EBC; 
+   --primary-accent-livebox-color: #FF3131; 
  }
 
 .LivePlayerBarBox {
    height: 5vh;
    width: 100vw;
-   background: linear-gradient(23deg ,#e636ae 1%,  var(--primary-accent-livebox-color) 100%);
+   background: linear-gradient(23deg ,#ff00ae 1%,  var(--primary-accent-livebox-color) 100%);
    box-shadow: 10px 14px 16px -1px rgba(0, 0, 0, 0.1);
+   background-size: 300% 300%;
+   animation: color 20s ease-in-out infinite alternate-reverse;
+} 
+
+@keyframes color {
+   0% {background-position: 0 50%;}
+   50% {background-position: 100% 50%;}
+   100% {background-position: 0 50%;}
 }

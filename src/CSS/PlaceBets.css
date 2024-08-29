@@ -1,0 +1,8 @@
+#betsBox {
+    width: 80%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid white;
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+}

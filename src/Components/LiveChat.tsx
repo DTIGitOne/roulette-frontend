@@ -75,7 +75,7 @@ const LiveChat: FC = () => {
    return (
       <div id="liveChatBox">
         <div id="messagesBox" ref={messages}>
-            {/* Messages will be appended here dynamically */}
+            {/* appended messages box */}
         </div>
         <form onSubmit={handleSubmit} id="messageBox">
             <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="message" type="text" />

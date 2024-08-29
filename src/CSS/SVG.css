@@ -22,7 +22,7 @@
 
 .animated-bg svg {
   position: absolute;
-  width: 150%; /* Increase size to make it larger than the viewport */
+  width: 150%;
   height: 150%;
 }
 

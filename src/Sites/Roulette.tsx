@@ -6,6 +6,7 @@ import RouletteWheel from '../Components/RouletteWheel';
 import NeonIcon from '../SVG/NeonSpin';
 import MessagesBox from '../Components/messages';
 import LiveChat from '../Components/LiveChat';
+import PlaceBets from '../Components/PlaceBets';
 
 const Roulette:FC = () => {
    return (
@@ -17,7 +18,9 @@ const Roulette:FC = () => {
           <RouletteWheel />
          </div>
          <div className=' flex justify-center items-center h-full p-3' style={{width: "54%"}}>
-          <div className=' h-full w-3/4'></div>
+          <div className=' h-full w-3/4 flex justify-center items-center'>
+           <PlaceBets />
+          </div>
           <div className=' h-full w-1/4'>
            <LiveChat />
           </div>
