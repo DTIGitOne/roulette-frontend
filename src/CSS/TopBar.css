@@ -23,12 +23,22 @@
 	left: 0;
 	width: 180px;
 	font-size: 26px;
-   height: 100%;
+    height: 100%;
 	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-   font-family: "Comfortaa", sans-serif;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.menuButton {
+	width: 180px;
+	font-family: "Comfortaa", sans-serif;
+	font-size: 26px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .menuLeft .btn p {
@@ -178,6 +188,7 @@
     display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 220px;
 }
 
 .profileDetailsBox div span {
@@ -269,8 +280,27 @@
    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
+.menu {
+	animation-duration: 0.1s;
+	height: 0vh;
+	animation-fill-mode: forwards;
+}
+
+.menu button:hover {
+	color: #fff;
+	letter-spacing: 1px;
+	transition: 0.2s;
+	transition-delay: 0.5;
+	background-color: #06fa8a;
+}
+
 @keyframes color {
 	0% {background-position: 0 50%;}
 	50% {background-position: 100% 50%;}
 	100% {background-position: 0 50%;}
+}
+
+@keyframes open {
+	0% {height: 0vh; display: flex;}
+	100% {height: 7vh;}
 }

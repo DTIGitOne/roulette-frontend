@@ -2,7 +2,9 @@
 export const ROUTES = {
    Roulette : "/Roulette",
    Login : "/Login",
-   Signup : "/Signup"
+   Signup : "/Signup",
+   Profile: "/Profile/:id",
+   Deposit: "/Deposit"
 };
 
 export const segments = [

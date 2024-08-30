@@ -6,6 +6,8 @@ import { getWheelSpin } from "../Api/Api";
 const RouletteWheel: FC = () => {
   const [timer, setTimer] = useState(0);
   const [spinning, setSpinning] = useState(false);
+  const [innerNumber, setInnterNumber] = useState(1);
+  const [outerNumber, setOuterNumber] = useState(1);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const valueContainerRef = useRef<HTMLDivElement>(null);
   const rouletteWheelRef = useRef<HTMLDivElement>(null);
@@ -27,9 +29,18 @@ const RouletteWheel: FC = () => {
   useEffect(() => {
     getSpin();
 
+    let current = 1;
+    let numberOuter= 1;
+    let numberInnter = 1;
+    let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); 
+    let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
+
+    let spinOuter = (Math.abs(40 - current + numberOuter)) * 9 + rand + 1440;
+    let spinInner = (Math.abs(40 - current + numberInnter)) * 9 + rand2 + 1440;
+
     let progressEndValue = 100;
-    let totalDuration = 20000; // Total duration in milliseconds
-    let steps = 1000; // Number of steps
+    let totalDuration = 20000; // Wheel wait time
+    let steps = 1000; // Number of steps for loading
 
     let interval = totalDuration / steps;
 
@@ -69,9 +80,10 @@ const RouletteWheel: FC = () => {
         if (Math.abs(progressValue - progressEndValue) < 0.001) {
           setSpinning(true);
 
+          // Update the custom properties dynamically
           if (root) {
-            root.style.setProperty('--deg', '1800deg');
-            root.style.setProperty('--deg2', '-2080deg');
+            root.style.setProperty('--deg', `${spinOuter}deg`);
+            root.style.setProperty('--deg2', `${-spinInner}deg`);
           }
           if (rouletteWheel) {
             rouletteWheel.style.animationName = "spin";
@@ -87,6 +99,8 @@ const RouletteWheel: FC = () => {
             if (rouletteWheel2) {
               rouletteWheel2.style.animationName = "";
             }
+
+            // Update current rotation to final rotation value
             progressValue = 0;
             elapsedTime = 0;
             setSpinning(false);
@@ -103,7 +117,7 @@ const RouletteWheel: FC = () => {
     return () => {
       clearInterval(animationInterval);
     };
-  }, []);
+  }, []); 
 
   const getRotationStyle = (index: number) => {
     let size1 = index * 9;
