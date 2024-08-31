@@ -13,3 +13,7 @@ export interface DateDataState {
 export interface RootState {
     dateData: DateDataState; 
 }
+
+export interface RouletteWheelProps {
+    currentTimer: number;
+  }

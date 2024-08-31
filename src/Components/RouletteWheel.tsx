@@ -1,57 +1,64 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import "../CSS/Wheel.css";
 import { segments } from "../Constants/Constants";
-import { getWheelSpin } from "../Api/Api";
+import { RouletteWheelProps } from "../Interface/Interface";
 
-const RouletteWheel: FC = () => {
+const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
   const [timer, setTimer] = useState(0);
   const [spinning, setSpinning] = useState(false);
-  const [innerNumber, setInnterNumber] = useState(1);
-  const [outerNumber, setOuterNumber] = useState(1);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const valueContainerRef = useRef<HTMLDivElement>(null);
   const rouletteWheelRef = useRef<HTMLDivElement>(null);
   const rouletteWheel2Ref = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const token = localStorage.getItem('authorization');
-
-  const getSpin = async () => {
-    try {
-      const response = await getWheelSpin(token)
-
-      console.log(response);
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
   useEffect(() => {
-    getSpin();
+    let totalDuration: number;
+    let isTimerZero = false;
 
     let current = 1;
-    let numberOuter= 1;
-    let numberInnter = 1;
+    let numberOuter= 4;
+    let numberInnter = 36;
     let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); 
     let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
 
+    const rouletteWheel = rouletteWheelRef.current;
+    const rouletteWheel2 = rouletteWheel2Ref.current;
+    const root = rootRef.current;
+
     let spinOuter = (Math.abs(40 - current + numberOuter)) * 9 + rand + 1440;
     let spinInner = (Math.abs(40 - current + numberInnter)) * 9 + rand2 + 1440;
+  
+    if (currentTimer <= 15000) {
+      setSpinning(true);
+      isTimerZero = true;
+
+      totalDuration = 15000 - currentTimer;
+      console.log(`outer: ${spinOuter}`);
+
+        if (root) {
+          root.style.setProperty('--deg', `${spinOuter}deg`);
+          root.style.setProperty('--deg2', `${-spinInner}deg`);
+        }
+        if (rouletteWheel) {
+          rouletteWheel.style.animationName = "";
+        }
+        if (rouletteWheel2) {
+          rouletteWheel2.style.animationName = "";
+        }
+    } else {
+        totalDuration = currentTimer - 15000;
+    }
 
     let progressEndValue = 100;
-    let totalDuration = 20000; // Wheel wait time
     let steps = 1000; // Number of steps for loading
 
     let interval = totalDuration / steps;
 
     let progressValue = 0;
     let elapsedTime = 0;
-    let isTimerZero = false;
 
     const progressBar = progressBarRef.current;
-    const rouletteWheel = rouletteWheelRef.current;
-    const rouletteWheel2 = rouletteWheel2Ref.current;
-    const root = rootRef.current;
 
     let animationInterval: NodeJS.Timeout; // Declare animationInterval in the outer scope
 
@@ -105,7 +112,7 @@ const RouletteWheel: FC = () => {
             elapsedTime = 0;
             setSpinning(false);
             animateProgress();
-          }, 15000);
+          }, 15000 - currentTimer);
 
           clearInterval(animationInterval);
         }

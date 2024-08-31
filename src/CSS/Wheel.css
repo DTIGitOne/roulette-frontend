@@ -57,7 +57,8 @@
    justify-content: center;
    align-items: center;
    position: relative;
-   height: 670px;
+   height: 640px;
+   width: 600px;
 }
 
 #rouletteWheel {

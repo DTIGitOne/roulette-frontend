@@ -1,6 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
-import { io } from "socket.io-client";
 import "../CSS/LiveChat.css";
 import { socketConection } from "../Socket/Socket";
 

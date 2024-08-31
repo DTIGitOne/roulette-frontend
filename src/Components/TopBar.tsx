@@ -36,6 +36,12 @@ const TopBar:FC = () => {
     }
    }
 
+   const navWithdraw = () => {
+    if (currentPath !== "/Withdraw") {
+      navigate("/Withdraw");
+    }
+   }
+
    useEffect(() => {
     const menu = menuRef.current;
 
@@ -51,7 +57,7 @@ const TopBar:FC = () => {
       <div className="topBarBox flex items-center justify-between select-none">
         <div className="menuLeft">
           <div onMouseOver={() => setMenuOpen(true)} onMouseLeave={() => setMenuOpen(false)} className="btn cursor-pointer"><p>Games</p></div>
-          <div className="btn cursor-pointer"><p>Withdraw</p></div>
+          <div onClick={navWithdraw} className="btn cursor-pointer"><p>Withdraw</p></div>
           <div onClick={navDeposit} className="btn cursor-pointer"><p>Deposit</p></div>
         </div>
           {loggedUser ? (

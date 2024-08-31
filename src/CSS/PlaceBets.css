@@ -6,3 +6,14 @@
     backdrop-filter: blur(15px);
     border-radius: 15px;
 }
+
+.betsPlacedSegments {
+    width: 100%;
+    padding: 5px;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+}

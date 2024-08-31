@@ -4,7 +4,8 @@ export const ROUTES = {
    Login : "/Login",
    Signup : "/Signup",
    Profile: "/Profile/:id",
-   Deposit: "/Deposit"
+   Deposit: "/Deposit",
+   Withdraw: "/Withdraw"
 };
 
 export const segments = [

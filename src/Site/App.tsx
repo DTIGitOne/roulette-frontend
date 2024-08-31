@@ -6,6 +6,7 @@ import LoginPage from "../Sites/Login";
 import SignupPage from "../Sites/Signup";
 import ProfilePage from "../Sites/Profile";
 import DepositPage from "../Sites/Deposit";
+import WithdrawPage from "../Sites/Withraw";
 
 const App:FC = () => {
   return (
@@ -17,6 +18,7 @@ const App:FC = () => {
         <Route path={ROUTES.Signup} element={<SignupPage />} />
         <Route path={ROUTES.Profile} element={<ProfilePage />} />
         <Route path={ROUTES.Deposit} element={<DepositPage />} />
+        <Route path={ROUTES.Withdraw} element={<WithdrawPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
