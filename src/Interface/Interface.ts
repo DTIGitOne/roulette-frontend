@@ -16,4 +16,8 @@ export interface RootState {
 
 export interface RouletteWheelProps {
     currentTimer: number;
+    newInner: number;
+    newOuter: number;
+    pastInner: number;
+    pastOuter: number;
   }

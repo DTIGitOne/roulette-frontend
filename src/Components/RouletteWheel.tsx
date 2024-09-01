@@ -3,7 +3,7 @@ import "../CSS/Wheel.css";
 import { segments } from "../Constants/Constants";
 import { RouletteWheelProps } from "../Interface/Interface";
 
-const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
+const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOuter, pastInner, pastOuter }) => {
   const [timer, setTimer] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -11,14 +11,31 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
   const rouletteWheelRef = useRef<HTMLDivElement>(null);
   const rouletteWheel2Ref = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef(newOuter);
+  const innterRef = useRef(newInner);
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    let totalDuration: number;
+    outerRef.current = newOuter;
+    innterRef.current = newInner;
+  }, [newOuter, newInner]);
+
+  useEffect(() => {
+    console.log(currentTimer);
+
+    let duration = 20000; // Default duration for looping
+    if (!isInitialized.current) {
+      // Use initial duration for the first spin
+      duration = currentTimer - 15000;
+      isInitialized.current = true;
+    }
+
+    let totalDuration = duration;
     let isTimerZero = false;
 
     let current = 1;
-    let numberOuter= 4;
-    let numberInnter = 36;
+    let numberOuter = outerRef.current;
+    let numberInnter = innterRef.current;
     let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); 
     let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
 
@@ -28,27 +45,6 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
 
     let spinOuter = (Math.abs(40 - current + numberOuter)) * 9 + rand + 1440;
     let spinInner = (Math.abs(40 - current + numberInnter)) * 9 + rand2 + 1440;
-  
-    if (currentTimer <= 15000) {
-      setSpinning(true);
-      isTimerZero = true;
-
-      totalDuration = 15000 - currentTimer;
-      console.log(`outer: ${spinOuter}`);
-
-        if (root) {
-          root.style.setProperty('--deg', `${spinOuter}deg`);
-          root.style.setProperty('--deg2', `${-spinInner}deg`);
-        }
-        if (rouletteWheel) {
-          rouletteWheel.style.animationName = "";
-        }
-        if (rouletteWheel2) {
-          rouletteWheel2.style.animationName = "";
-        }
-    } else {
-        totalDuration = currentTimer - 15000;
-    }
 
     let progressEndValue = 100;
     let steps = 1000; // Number of steps for loading
@@ -60,10 +56,10 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
 
     const progressBar = progressBarRef.current;
 
-    let animationInterval: NodeJS.Timeout; // Declare animationInterval in the outer scope
+    let animationInterval: number; // Use number instead of NodeJS.Timeout
 
     function animateProgress() {
-      animationInterval = setInterval(() => {
+      animationInterval = window.setInterval(() => {
         progressValue += 0.1;
         elapsedTime += interval;
 
@@ -99,7 +95,7 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
             rouletteWheel2.style.animationName = "spinInner";
           }
 
-          setTimeout(() => {
+          window.setTimeout(() => {
             if (rouletteWheel) {
               rouletteWheel.style.animationName = "";
             }
@@ -112,19 +108,37 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer }) => {
             elapsedTime = 0;
             setSpinning(false);
             animateProgress();
-          }, 15000 - currentTimer);
+          }, 15000);
 
-          clearInterval(animationInterval);
+          window.clearInterval(animationInterval);
         }
       }, interval);
     }
 
-    animateProgress();
+    // Start animation after initial timeout or immediately if already initialized
+    if (!isInitialized.current) {
+      if (currentTimer <= 15000) {
+        console.log(`currentTimer:${currentTimer}`)
+        if (root) {
+          console.log(`pastInner:${pastOuter}`);
+          console.log(`pastOuter:${pastInner}`);
+          root.style.setProperty('--deg', `${pastOuter}deg`);
+          root.style.setProperty('--deg2', `${-pastInner}deg`);
+        }
+      }
 
+      window.setTimeout(() => {
+        animateProgress();
+      }, currentTimer - 15000);
+    } else {
+      animateProgress();
+    }
+
+    // Cleanup function
     return () => {
-      clearInterval(animationInterval);
+      window.clearInterval(animationInterval);
     };
-  }, []); 
+  }, [currentTimer, newInner, newOuter]);
 
   const getRotationStyle = (index: number) => {
     let size1 = index * 9;
