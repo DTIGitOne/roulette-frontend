@@ -14,10 +14,27 @@ const Roulette: FC = () => {
    const [newSpin, setNewSpin] = useState(0);
    const [load, setLoad] = useState(true); // Initialize loading state as true
    const [betNotConnected, setBetNotConeccted] = useState(true);
-   const [newNumberInner, setNewNumberInner] = useState(1);
-   const [newNumberOuter, setNewNumberOuter] = useState(1);
+   const [newNumberInner, setNewNumberInner] = useState(0);
+   const [newNumberOuter, setNewNumberOuter] = useState(0);
    const [pastOuter, setPastOuter] = useState(0);
    const [pastInner, setPastInner] = useState(0);
+
+   const [componentKey, setComponentKey] = useState(0);
+
+useEffect(() => {
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
+      // Simulate unmount by resetting the component key
+      setComponentKey((prevKey) => prevKey + 1);
+    }
+  };
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+}, []);
 
    useEffect(() => {
     setLoad(true); // Show loading initially
@@ -41,9 +58,10 @@ const Roulette: FC = () => {
     // Set up socket listeners
     const handleBetResults = (data: any) => {
       const { numberInner, numberOuter, colorInner, colorOuter, wins } = data;
-      
-      console.log(`new: ${numberInner} ${numberOuter}`)
 
+
+      console.log(numberInner);
+      console.log(numberOuter);
       setNewNumberInner(numberInner);
       setNewNumberOuter(numberOuter);
     };
@@ -67,7 +85,7 @@ const Roulette: FC = () => {
   }, []);
 
    return (
-     <>
+    <>
        {load || betNotConnected ? (
         <div className='h-screen w-screen flex justify-center items-center'>
           <CircularProgress />
@@ -83,7 +101,15 @@ const Roulette: FC = () => {
               </div>
               <div className='pt-9 flex-col flex' style={{ width: "58%", height: "100%" }}>
                 <div className='flex p-6 pl-24'>
-                  <RouletteWheel currentTimer={newSpin} newInner={newNumberInner} newOuter={newNumberOuter} pastInner={pastInner} pastOuter={pastOuter}/>
+                  {/* Apply the key prop to force remounting */}
+                  <RouletteWheel 
+                    key={componentKey} // Apply the key here
+                    currentTimer={newSpin} 
+                    newInner={newNumberInner} 
+                    newOuter={newNumberOuter} 
+                    pastInner={pastInner} 
+                    pastOuter={pastOuter}
+                  />
                   <RouletteDetails />
                 </div>
                 <div className='w-full h-full flex justify-center items-center'>

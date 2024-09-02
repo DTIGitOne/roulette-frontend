@@ -10,6 +10,8 @@
 
 :root {
    --deg2: 0deg;
+   --deg3: 0deg;
+   --deg4: 0deg;
 }
 
 .containter1 {
@@ -73,6 +75,7 @@
    justify-content: center;
    align-items: center;
    animation-fill-mode: forwards;
+   rotate: var(--deg3);
 }
 #box2 {
    position: absolute;
@@ -138,6 +141,7 @@
    justify-content: center;
    align-items: center;
    animation-fill-mode: forwards;
+   rotate: var(--deg4);
    z-index: 20;
 }
 

@@ -11,45 +11,20 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
   const rouletteWheelRef = useRef<HTMLDivElement>(null);
   const rouletteWheel2Ref = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const outerRef = useRef(newOuter);
-  const innterRef = useRef(newInner);
-  const isInitialized = useRef(false);
+  const [outerRef, setOuterRef] = useState<number | null>(null);
+  const [innerRef, setInnerRef] = useState<number | null>(null);
 
-  useEffect(() => {
-    outerRef.current = newOuter;
-    innterRef.current = newInner;
-  }, [newOuter, newInner]);
+  function animateProgress(timer: number) {
+    console.log(timer);
+    let duration = timer; // loop timer before animation
+    
+    let totalDuration = duration; // variable for the duration
+    let isTimerZero = false; // change text when timer is true
 
-  useEffect(() => {
-    console.log(currentTimer);
-
-    let duration = 20000; // Default duration for looping
-    if (!isInitialized.current) {
-      // Use initial duration for the first spin
-      duration = currentTimer - 15000;
-      isInitialized.current = true;
-    }
-
-    let totalDuration = duration;
-    let isTimerZero = false;
-
-    let current = 1;
-    let numberOuter = outerRef.current;
-    let numberInnter = innterRef.current;
-    let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); 
-    let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
-
-    const rouletteWheel = rouletteWheelRef.current;
-    const rouletteWheel2 = rouletteWheel2Ref.current;
-    const root = rootRef.current;
-
-    let spinOuter = (Math.abs(40 - current + numberOuter)) * 9 + rand + 1440;
-    let spinInner = (Math.abs(40 - current + numberInnter)) * 9 + rand2 + 1440;
-
-    let progressEndValue = 100;
+    let progressEndValue = 100; // what is the final % for the loader 
     let steps = 1000; // Number of steps for loading
 
-    let interval = totalDuration / steps;
+    let interval = totalDuration / steps; // speed of the loader 
 
     let progressValue = 0;
     let elapsedTime = 0;
@@ -58,87 +33,148 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
 
     let animationInterval: number; // Use number instead of NodeJS.Timeout
 
-    function animateProgress() {
-      animationInterval = window.setInterval(() => {
-        progressValue += 0.1;
-        elapsedTime += interval;
+    animationInterval = window.setInterval(() => {
+      progressValue += 0.1;
+      elapsedTime += interval;
 
-        let remainingSeconds = Math.round((totalDuration - elapsedTime) / 1000);
-        if (remainingSeconds > -0.2) {
-          setTimer(remainingSeconds);
-        } else {
-          if (!isTimerZero) {
-            setTimer(0);
-            isTimerZero = true;
-          }
-        }
-
-        if (progressBar) {
-          progressBar.style.background = `conic-gradient(
-            transparent ${progressValue * (360 / progressEndValue)}deg,
-            #06fa8a ${progressValue * (360 / progressEndValue)}deg
-          )`;
-        }
-
-        if (Math.abs(progressValue - progressEndValue) < 0.001) {
-          setSpinning(true);
-
-          // Update the custom properties dynamically
-          if (root) {
-            root.style.setProperty('--deg', `${spinOuter}deg`);
-            root.style.setProperty('--deg2', `${-spinInner}deg`);
-          }
-          if (rouletteWheel) {
-            rouletteWheel.style.animationName = "spin";
-          }
-          if (rouletteWheel2) {
-            rouletteWheel2.style.animationName = "spinInner";
-          }
-
-          window.setTimeout(() => {
-            if (rouletteWheel) {
-              rouletteWheel.style.animationName = "";
-            }
-            if (rouletteWheel2) {
-              rouletteWheel2.style.animationName = "";
-            }
-
-            // Update current rotation to final rotation value
-            progressValue = 0;
-            elapsedTime = 0;
-            setSpinning(false);
-            animateProgress();
-          }, 15000);
-
-          window.clearInterval(animationInterval);
-        }
-      }, interval);
-    }
-
-    // Start animation after initial timeout or immediately if already initialized
-    if (!isInitialized.current) {
-      if (currentTimer <= 15000) {
-        console.log(`currentTimer:${currentTimer}`)
-        if (root) {
-          console.log(`pastInner:${pastOuter}`);
-          console.log(`pastOuter:${pastInner}`);
-          root.style.setProperty('--deg', `${pastOuter}deg`);
-          root.style.setProperty('--deg2', `${-pastInner}deg`);
+      let remainingSeconds = Math.round((totalDuration - elapsedTime) / 1000);
+      if (remainingSeconds > -0.2) {
+        setTimer(remainingSeconds);
+      } else {
+        if (!isTimerZero) {
+          setTimer(0);
+          isTimerZero = true;
         }
       }
 
-      window.setTimeout(() => {
-        animateProgress();
-      }, currentTimer - 15000);
-    } else {
-      animateProgress();
-    }
+      if (progressBar) {
+        progressBar.style.background = `conic-gradient(
+          transparent ${progressValue * (360 / progressEndValue)}deg,
+          #06fa8a ${progressValue * (360 / progressEndValue)}deg
+        )`;
+      }
 
-    // Cleanup function
+      if (Math.abs(progressValue - progressEndValue) < 0.001) {
+        
+
+        window.clearInterval(animationInterval);
+      }
+    }, interval);
+
+    return () => {
+      window.clearInterval(animationInterval);
+      progressValue = 0;
+      elapsedTime = 0;
+    };
+  }
+
+  function spinWheel(newSelectedInner: number | null, newselectedOuter: number | null) {
+    let duration = 20000; // loop timer before animation
+    
+    let totalDuration = duration; // variable for the duration
+    let isTimerZero = false; // change text when timer is true
+
+    let current = 1;
+    let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); // add random effect for random color (few degreess of the center segment)
+    let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
+
+    const rouletteWheel = rouletteWheelRef.current; // wheelRefs
+    const rouletteWheel2 = rouletteWheel2Ref.current;
+    const root = rootRef.current;
+
+    let LastSpinOuter = (Math.abs(40 - current + pastOuter)) * 9 + rand + 1440; // calculate degresss for selected segment (past spin result)
+    let LastSpinInner = (Math.abs(40 - current + pastInner)) * 9 + rand2 + 1440;
+
+    let animationInterval: number; // Use number instead of NodeJS.Timeout
+
+    animationInterval = window.setInterval(() => {
+
+      if (newselectedOuter !== null && newSelectedInner !== null) {
+
+        let numberOuter = newselectedOuter;
+        let numberInnter = newSelectedInner;
+
+        let spinOuter = (Math.abs(40 - current + numberOuter)) * 9 + rand + 1440; // calculate degresss for selected segment
+        let spinInner = (Math.abs(40 - current + numberInnter)) * 9 + rand2 + 1440;
+        setSpinning(true);
+
+
+        // Update the custom properties dynamically
+        if (root) {
+          root.style.setProperty('--deg', `${spinOuter}deg`);
+          root.style.setProperty('--deg2', `${-spinInner}deg`);
+        }
+        if (rouletteWheel) {
+          rouletteWheel.style.animationName = "spin";
+        }
+        if (rouletteWheel2) {
+          rouletteWheel2.style.animationName = "spinInner";
+        }
+
+        window.setTimeout(() => {
+          if (rouletteWheel) {
+            rouletteWheel.style.animationName = "";
+          }
+          if (rouletteWheel2) {
+            rouletteWheel2.style.animationName = "";
+          }
+
+          animateProgress(20000);
+
+          // Update current rotation to final rotation value
+          setSpinning(false);
+        }, 15000);
+
+        window.clearInterval(animationInterval);
+      }
+    });
+
     return () => {
       window.clearInterval(animationInterval);
     };
-  }, [currentTimer, newInner, newOuter]);
+  }
+
+  useEffect(() => {
+    setOuterRef(newOuter);
+    setInnerRef(newInner);
+
+    console.log(`new Outer:${outerRef}`);
+    console.log(`new Inner:${innerRef}`);
+  
+    spinWheel(innerRef, outerRef);
+  }, [newOuter, newInner]);
+
+  useEffect(() => {
+    let current = 1;
+    let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); // add random effect for random color (few degreess of the center segment)
+    let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
+
+    const root = rootRef.current;
+
+    let LastSpinOuter = (Math.abs(40 - current + pastOuter)) * 9 + rand + 1440; // calculate degresss for selected segment (past spin result)
+    let LastSpinInner = (Math.abs(40 - current + pastInner)) * 9 + rand2 + 1440;
+
+    console.log("remounted");
+    if (currentTimer >= 20001) {
+      if (root) {
+        root.style.setProperty('--deg3', `${LastSpinOuter}deg`);
+        root.style.setProperty('--deg4', `${-LastSpinInner}deg`);
+      }
+
+      window.setTimeout(() => {
+        console.log("code executed");
+        if (root) {
+          root.style.setProperty('--deg3', `${0}deg`);
+          root.style.setProperty('--deg4', `${-0}deg`);
+        }
+        animateProgress(20000);
+      }, currentTimer - 20000);
+    } else if (currentTimer <= 20000) {
+      const time = currentTimer;
+      console.log(time);
+      animateProgress(time);
+    }
+  }, []);
 
   const getRotationStyle = (index: number) => {
     let size1 = index * 9;
