@@ -89,8 +89,8 @@
 
 #picker {
    background-color: #ffffff;
-   width: 40px;
-   height: 85px;
+   width: 35px;
+   height: 78px;
    position: absolute;
    z-index: 9999;
    top: 0;
@@ -122,8 +122,8 @@
 
 #border3 {
    border-radius: 50%;
-   width: 395px;
-   height: 395px;
+   width: 405px;
+   height: 405px;
    border: 3px solid #fff;
    z-index: 50;
    position: absolute;
@@ -150,7 +150,7 @@
    width: 7%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 97%, #000000 97%);
+   background: linear-gradient(to top, transparent 98%, #000000 97%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -165,7 +165,7 @@
    width: 7%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 97%, #d0faff 97%);
+   background: linear-gradient(to top, transparent 98%, #d0faff 97%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -181,7 +181,7 @@
    width: 7%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0); 
-   background: linear-gradient(to top, transparent 97%, #31bfff 97%);
+   background: linear-gradient(to top, transparent 98%, #31bfff 97%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;
@@ -197,7 +197,7 @@
    width: 7.3%;
    position: absolute;
    clip-path: polygon(50% 50%, 0 0, 100% 0);
-   background: linear-gradient(to top, transparent 97%, #05e77e 97%);
+   background: linear-gradient(to top, transparent 98%, #05e77e 97%);
    transform-origin: 50% 50%;
    display: inline;
    color: white;

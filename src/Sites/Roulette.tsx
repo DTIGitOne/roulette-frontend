@@ -14,8 +14,11 @@ const Roulette: FC = () => {
    const [newSpin, setNewSpin] = useState(0);
    const [load, setLoad] = useState(true); // Initialize loading state as true
    const [betNotConnected, setBetNotConeccted] = useState(true);
-   const [newNumberInner, setNewNumberInner] = useState(0);
-   const [newNumberOuter, setNewNumberOuter] = useState(0);
+   const [newNumberInner, setNewNumberInner] = useState(null);
+   const [newNumberOuter, setNewNumberOuter] = useState(null);
+   const [newColorInner, setNewColorInner] = useState(null);
+   const [newColorOuter, setNewColorOuter] = useState(null);
+   const [pastArray, setPastArray] = useState(null);
    const [pastOuter, setPastOuter] = useState(0);
    const [pastInner, setPastInner] = useState(0);
 
@@ -51,7 +54,10 @@ useEffect(() => {
       setPastOuter(colorOuter);
 
       if (colorInner && colorOuter) {
-        setBetNotConeccted(false);
+        if (data) {
+          setPastArray(data);
+          setBetNotConeccted(false);
+        }
       }
     }
 
@@ -60,10 +66,10 @@ useEffect(() => {
       const { numberInner, numberOuter, colorInner, colorOuter, wins } = data;
 
 
-      console.log(numberInner);
-      console.log(numberOuter);
       setNewNumberInner(numberInner);
       setNewNumberOuter(numberOuter);
+      setNewColorInner(colorInner);
+      setNewColorOuter(colorOuter);
     };
 
     const handleTimeUntilSpin = (data: any) => {
@@ -84,6 +90,9 @@ useEffect(() => {
     };
   }, []);
 
+  useEffect(() => {
+  }, [pastArray]);
+
    return (
     <>
        {load || betNotConnected ? (
@@ -99,21 +108,22 @@ useEffect(() => {
               <div className='flex justify-center h-full' style={{ width: "42%" }}>
                 <PlaceBets />
               </div>
-              <div className='pt-9 flex-col flex' style={{ width: "58%", height: "100%" }}>
-                <div className='flex p-6 pl-24'>
-                  {/* Apply the key prop to force remounting */}
+              <div className='pt-4 flex-col flex' style={{ width: "58%", height: "100%" }}>
+                <div className='flex pl-24'>
                   <RouletteWheel 
                     key={componentKey} // Apply the key here
                     currentTimer={newSpin} 
                     newInner={newNumberInner} 
                     newOuter={newNumberOuter} 
+                    newInnerColor={newColorInner}
+                    newOuterColor={newColorOuter}
                     pastInner={pastInner} 
                     pastOuter={pastOuter}
                   />
                   <RouletteDetails />
                 </div>
                 <div className='w-full h-full flex justify-center items-center'>
-                  <LastColors />
+                  <LastColors initialArray={pastArray}/>
                 </div>
               </div>
             </div>

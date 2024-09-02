@@ -2,8 +2,10 @@ import { FC, useState, useEffect, useRef } from "react";
 import "../CSS/Wheel.css";
 import { segments } from "../Constants/Constants";
 import { RouletteWheelProps } from "../Interface/Interface";
+import { useDispatch } from "react-redux";
+import { setNewHistory } from "../Redux/Slices/newHistorySlice";
 
-const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOuter, pastInner, pastOuter }) => {
+const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOuter, newInnerColor, newOuterColor, pastInner, pastOuter }) => {
   const [timer, setTimer] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -14,8 +16,9 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
   const [outerRef, setOuterRef] = useState<number | null>(null);
   const [innerRef, setInnerRef] = useState<number | null>(null);
 
+  const dispatch = useDispatch();
+
   function animateProgress(timer: number) {
-    console.log(timer);
     let duration = timer; // loop timer before animation
     
     let totalDuration = duration; // variable for the duration
@@ -69,11 +72,7 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
   }
 
   function spinWheel(newSelectedInner: number | null, newselectedOuter: number | null) {
-    let duration = 20000; // loop timer before animation
     
-    let totalDuration = duration; // variable for the duration
-    let isTimerZero = false; // change text when timer is true
-
     let current = 1;
     let rand = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1); // add random effect for random color (few degreess of the center segment)
     let rand2 = (Math.random() * 3) * (Math.random() < 0.5 ? -1 : 1);
@@ -81,9 +80,6 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
     const rouletteWheel = rouletteWheelRef.current; // wheelRefs
     const rouletteWheel2 = rouletteWheel2Ref.current;
     const root = rootRef.current;
-
-    let LastSpinOuter = (Math.abs(40 - current + pastOuter)) * 9 + rand + 1440; // calculate degresss for selected segment (past spin result)
-    let LastSpinInner = (Math.abs(40 - current + pastInner)) * 9 + rand2 + 1440;
 
     let animationInterval: number; // Use number instead of NodeJS.Timeout
 
@@ -119,6 +115,15 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
             rouletteWheel2.style.animationName = "";
           }
 
+          const dataArray = [
+            {
+              colorInner: newInnerColor,
+              colorOuter: newOuterColor
+            }
+          ]
+
+          dispatch(setNewHistory(dataArray));
+
           animateProgress(20000);
 
           // Update current rotation to final rotation value
@@ -137,11 +142,8 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
   useEffect(() => {
     setOuterRef(newOuter);
     setInnerRef(newInner);
-
-    console.log(`new Outer:${outerRef}`);
-    console.log(`new Inner:${innerRef}`);
   
-    spinWheel(innerRef, outerRef);
+    spinWheel(newInner, newOuter);
   }, [newOuter, newInner]);
 
   useEffect(() => {
@@ -154,7 +156,6 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
     let LastSpinOuter = (Math.abs(40 - current + pastOuter)) * 9 + rand + 1440; // calculate degresss for selected segment (past spin result)
     let LastSpinInner = (Math.abs(40 - current + pastInner)) * 9 + rand2 + 1440;
 
-    console.log("remounted");
     if (currentTimer >= 20001) {
       if (root) {
         root.style.setProperty('--deg3', `${LastSpinOuter}deg`);
@@ -171,7 +172,6 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
       }, currentTimer - 20000);
     } else if (currentTimer <= 20000) {
       const time = currentTimer;
-      console.log(time);
       animateProgress(time);
     }
   }, []);
