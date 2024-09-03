@@ -22,23 +22,6 @@ const Roulette: FC = () => {
    const [pastOuter, setPastOuter] = useState(0);
    const [pastInner, setPastInner] = useState(0);
 
-   const [componentKey, setComponentKey] = useState(0);
-
-useEffect(() => {
-  const handleVisibilityChange = () => {
-    if (document.visibilityState === "hidden") {
-      // Simulate unmount by resetting the component key
-      setComponentKey((prevKey) => prevKey + 1);
-    }
-  };
-
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  return () => {
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-  };
-}, []);
-
    useEffect(() => {
     setLoad(true); // Show loading initially
 
@@ -48,15 +31,14 @@ useEffect(() => {
 
     const handlePastSpins = (data: any) => {
       const lastWin = data[data.length - 1];
-      const { colorInner, colorOuter } = lastWin;
+      const { numberInner, numberOuter } = lastWin;
 
-      setPastInner(colorInner);
-      setPastOuter(colorOuter);
+      setPastInner(numberInner);
+      setPastOuter(numberOuter);
 
-      if (colorInner && colorOuter) {
+      if (numberInner && numberOuter) {
         if (data) {
           setPastArray(data);
-          console.log(data);
           setBetNotConeccted(false);
         }
       }
@@ -112,7 +94,6 @@ useEffect(() => {
               <div className='pt-4 flex-col flex' style={{ width: "58%", height: "100%" }}>
                 <div className='flex pl-24'>
                   <RouletteWheel 
-                    key={componentKey} // Apply the key here
                     currentTimer={newSpin} 
                     newInner={newNumberInner} 
                     newOuter={newNumberOuter} 

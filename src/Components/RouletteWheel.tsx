@@ -158,6 +158,8 @@ const RouletteWheel: FC<RouletteWheelProps> = ({ currentTimer, newInner, newOute
 
     if (currentTimer >= 20001) {
       if (root) {
+        console.log(LastSpinOuter);
+        console.log(LastSpinInner);
         root.style.setProperty('--deg3', `${LastSpinOuter}deg`);
         root.style.setProperty('--deg4', `${-LastSpinInner}deg`);
       }
