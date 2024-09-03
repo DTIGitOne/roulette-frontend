@@ -6,27 +6,39 @@ import { RootState } from "../Redux/store";
 import { replaceColor } from "../Functions/Functions";
 
 const LastColors:FC<RouletteHistory> = ({initialArray}) => {
-    const [historyArray, setHistoryArray] = useState<HistoryItem[]>(initialArray?.slice(-20) || []);
-
-    const newHistoryVar = useSelector((state: RootState) => state.newHistory);
-
-    useEffect(() => {
-        // Update state correctly
-        setHistoryArray(initialArray?.slice(-20) || []);
-        console.log(historyArray);
-      }, [initialArray]);
-
-    /*
-    useEffect(() => {
-        setHistoryArray((prevArray) => [...prevArray, newHistoryVar]);
-        console.log(newHistoryVar);
-        console.log(historyArray);
-    }, [newHistoryVar]);
+    const [historyArray, setHistoryArray] = useState<HistoryItem[]>(
+        initialArray?.slice(-20) || []
+      );
     
-    useEffect(() => {
-        setHistoryArray(historyArray.push(newHistoryVar));
-    }, newHistoryVar)
-    */
+      const newHistoryVar: any = useSelector(
+        (state: RootState) => state.newHistory
+      );
+
+      useEffect(() => {
+        console.log(historyArray);
+      }, []);
+    
+      // Debug effect to log changes
+      useEffect(() => {
+        console.log("History Array Updated: ", historyArray);
+      }, [historyArray]);
+    
+      useEffect(() => {
+        if (newHistoryVar.historyArray) {
+          // Ensure the new item(s) are added correctly
+          setHistoryArray((prevArray) => {
+            // Check if newHistoryVar.historyArray is an array
+            const newItems = Array.isArray(newHistoryVar.historyArray)
+              ? newHistoryVar.historyArray
+              : [newHistoryVar.historyArray]; // Make sure it's treated as an array
+            
+            const updatedArray = [...prevArray, ...newItems]; // Spread the new items
+            
+            // Keep only the last 20 items
+            return updatedArray.slice(-20);
+          });
+        }
+      }, [newHistoryVar]);
     return (
       <div className=" flex flex-col w-full h-full items-center">
        <h1 className=" text-4xl text-white text-center">Last Wins</h1>

@@ -47,7 +47,7 @@ useEffect(() => {
     }
 
     const handlePastSpins = (data: any) => {
-      const lastWin = data.pop()
+      const lastWin = data[data.length - 1];
       const { colorInner, colorOuter } = lastWin;
 
       setPastInner(colorInner);
@@ -56,6 +56,7 @@ useEffect(() => {
       if (colorInner && colorOuter) {
         if (data) {
           setPastArray(data);
+          console.log(data);
           setBetNotConeccted(false);
         }
       }
