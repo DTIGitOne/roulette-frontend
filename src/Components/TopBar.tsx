@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { setTimeout } from "timers/promises";
 
 const TopBar:FC = () => {
-   const [loggedUser, setLoggedUser] = useState(true);
+   const [loggedUser, setLoggedUser] = useState(false);
    const [menuOpen, setMenuOpen] = useState(false);
    const [username, setUsername] = useState("DzimyJayaaaaaaaa");
    const menuRef = useRef<HTMLDivElement>(null);
