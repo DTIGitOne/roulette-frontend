@@ -1,4 +1,4 @@
-# The project cant be run without the packend component which isnt avaible for download.
+# The project cant be run without the backend component which isnt avaible for download.
 
 # This is just a presenation for those who are interested in my code writing.
 
