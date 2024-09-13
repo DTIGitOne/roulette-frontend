@@ -7,6 +7,8 @@ import SignupPage from "../Sites/Signup";
 import ProfilePage from "../Sites/Profile";
 import DepositPage from "../Sites/Deposit";
 import WithdrawPage from "../Sites/Withraw";
+import WithdrawEmailPage from "../Sites/WithdrawEmail";
+import CardDepositPage from "../Sites/CardDeposit";
 
 const App:FC = () => {
   const [componentKey, setComponentKey] = useState(0);
@@ -34,8 +36,10 @@ const App:FC = () => {
         <Route path={ROUTES.Login} element={<LoginPage />} />
         <Route path={ROUTES.Signup} element={<SignupPage />} />
         <Route path={ROUTES.Profile} element={<ProfilePage />} />
-        <Route path={ROUTES.Deposit} element={<DepositPage />} />
+        <Route path={ROUTES.Deposit} element={<DepositPage />} /> 
         <Route path={ROUTES.Withdraw} element={<WithdrawPage />} />
+        <Route path={ROUTES.WithdrawEmailPage} element={<WithdrawEmailPage />} />
+        <Route path={ROUTES.CardDepositPage} element={<CardDepositPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

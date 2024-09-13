@@ -6,6 +6,28 @@
   fill: #ffffff;
 }
 
+.cls-111 {
+  fill: #de4b9b;
+}
+
+.cls-111, .cls-222, .cls-333, .cls-444 {
+  stroke-width: 0px;
+}
+
+.cls-333 {
+  fill: #06fa8a;
+  animation: rotateAni 2s ease-in-out forwards;
+}
+
+.cls-444 {
+  fill: none;
+}
+
+#neonIcon {
+  width: 250px;
+  height: 250px;
+}
+
 #Layer_2 {
   display: inline;
   height: 60px;
@@ -33,4 +55,14 @@
   100% {
     transform: translateX(-10%);
   }
+}
+
+@keyframes fadeInLogo {
+  0% {opacity: 0;scale: 0.1;}
+  100% {opacity: 1;scale: 1;}
+}
+
+@keyframes fadeOutLogo {
+  0% {opacity: 1;scale: 1;}
+  100% {opacity: 0;scale: 0.1;}
 }
