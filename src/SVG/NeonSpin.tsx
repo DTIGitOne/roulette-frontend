@@ -1,8 +1,8 @@
 import '../CSS/SVG.css';
 
-const NeonIcon = () => {
-   return (
-<svg id='neonIcon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.14 186.64">
+const NeonIcon = (aniName: any) => {
+return (
+<svg id='neonIcon' xmlns="http://www.w3.org/2000/svg" style={{animationName: aniName.aniName}} viewBox="0 0 232.14 186.64">
   <g id="Layer_2-2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1-2">
       <g>

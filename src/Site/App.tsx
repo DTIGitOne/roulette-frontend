@@ -9,26 +9,51 @@ import DepositPage from "../Sites/Deposit";
 import WithdrawPage from "../Sites/Withraw";
 import WithdrawEmailPage from "../Sites/WithdrawEmail";
 import CardDepositPage from "../Sites/CardDeposit";
+import NeonIcon from "../SVG/NeonSpin";
 
 const App:FC = () => {
   const [componentKey, setComponentKey] = useState(0);
+  const [siteLoad, setSiteLoad] = useState(0);
+  const [animationNameCur, setAnimationNameCur] = useState("fadeInLogo");
 
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        // Increment the key to force re-render
-        setComponentKey((prevKey) => prevKey + 1);
-      }
-    };
+     if (siteLoad > 0) {
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+          // Increment the key to force re-render
+          setComponentKey((prevKey) => prevKey + 1);
+        }
+      };
+  
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+  
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
+    } else if (siteLoad === 0) {
+      window.setTimeout(() => {
+        const handleVisibilityChange = () => {
+          if (document.visibilityState === "visible") {
+            // Increment the key to force re-render
+            setComponentKey((prevKey) => prevKey + 1);
+          }
+        };
+    
+        document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+        setSiteLoad(1);
+    
+        return () => {
+          document.removeEventListener("visibilitychange", handleVisibilityChange);
+        };
+      }, 3000);
+    }
 
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
   }, []);
 
   return (
+    <>
+    {siteLoad ? (
     <Router>
       <Routes>
         <Route path='/' element={<Navigate to="Roulette" />} />
@@ -43,6 +68,12 @@ const App:FC = () => {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
+    ) : (
+    <div className='h-screen w-screen flex justify-center items-center' style={{background: "linear-gradient(187deg, rgb(34, 39, 59) 0%, #161D27 100%)"}}>
+      <NeonIcon aniName={animationNameCur}/>
+    </div>
+    )}
+    </>
   );
 }
 

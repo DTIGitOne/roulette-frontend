@@ -16,7 +16,6 @@
 
 .cls-333 {
   fill: #06fa8a;
-  animation: rotateAni 2s ease-in-out forwards;
 }
 
 .cls-444 {
@@ -26,6 +25,8 @@
 #neonIcon {
   width: 250px;
   height: 250px;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
 }
 
 #Layer_2 {
@@ -59,10 +60,12 @@
 
 @keyframes fadeInLogo {
   0% {opacity: 0;scale: 0.1;}
-  100% {opacity: 1;scale: 1;}
+  55% {opacity: 1;scale: 1;}
+  80% {opacity: 1;scale: 1;}
+  100% {opacity: 0;scale: 0.1;}
 }
 
 @keyframes fadeOutLogo {
-  0% {opacity: 1;scale: 1;}
-  100% {opacity: 0;scale: 0.1;}
+  0% {opacity: 1;}
+  100% {opacity: 0;}
 }

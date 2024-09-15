@@ -9,6 +9,7 @@ import RouletteDetails from '../Components/RouletteDetails';
 import LastColors from '../Components/LastWins';
 import { socketConection } from '../Socket/Socket';
 import { CircularProgress } from '@mui/material';
+import NeonIcon from '../SVG/NeonSpin';
 
 const Roulette: FC = () => {
    const [newSpin, setNewSpin] = useState(0);
@@ -21,72 +22,69 @@ const Roulette: FC = () => {
    const [pastArray, setPastArray] = useState(null);
    const [pastOuter, setPastOuter] = useState(0);
    const [pastInner, setPastInner] = useState(0);
+   const [animationNameCur, setAnimationNameCur] = useState("fadeInLogo");
 
    useEffect(() => {
-    setLoad(true); // Show loading initially
-
-    if (!socketConection.connected) {
-      socketConection.connect();
-    }
-
-    const handlePastSpins = (data: any) => {
-      const lastWin = data[data.length - 1];
-      const { numberInner, numberOuter } = lastWin;
-
-      setPastInner(numberInner);
-      setPastOuter(numberOuter);
-
-      if (numberInner && numberOuter) {
-        if (data) {
-          setPastArray(data);
-          setBetNotConeccted(false);
+      setLoad(true); // Show loading initially
+      if (!socketConection.connected) {
+        socketConection.connect();
+      }
+  
+      const handlePastSpins = (data: any) => {
+        const lastWin = data[data.length - 1];
+        const { numberInner, numberOuter } = lastWin;
+  
+        setPastInner(numberInner);
+        setPastOuter(numberOuter);
+  
+        if (numberInner && numberOuter) {
+          if (data) {
+            setPastArray(data);
+            setBetNotConeccted(false);
+          }
         }
       }
-    }
-
-    // Set up socket listeners
-    const handleBetResults = (data: any) => {
-      const { numberInner, numberOuter, colorInner, colorOuter, wins } = data;
-
-
-      setNewNumberInner(numberInner);
-      setNewNumberOuter(numberOuter);
-      setNewColorInner(colorInner);
-      setNewColorOuter(colorOuter);
-    };
-
-    const handleTimeUntilSpin = (data: any) => {
-      setLoad(false);
-      setNewSpin(data); 
-    };
-
-    socketConection.on('time until spin', handleTimeUntilSpin);
-    socketConection.on('bet results', handleBetResults);
-    socketConection.on('past Spins', handlePastSpins);
-
-    // Cleanup listeners on unmount
-    return () => {
-      socketConection.off('bet results', handleBetResults);
-      socketConection.off('time until spin', handleTimeUntilSpin);
-      socketConection.off('past Spins', handlePastSpins);
-      socketConection.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-  }, [pastArray]);
+  
+      // Set up socket listeners
+      const handleBetResults = (data: any) => {
+        const { numberInner, numberOuter, colorInner, colorOuter, wins } = data;
+  
+        setNewNumberInner(numberInner);
+        setNewNumberOuter(numberOuter);
+        setNewColorInner(colorInner);
+        setNewColorOuter(colorOuter);
+      };
+  
+      const handleTimeUntilSpin = (data: any) => {
+        setLoad(false);
+        setNewSpin(data); 
+      };
+  
+      socketConection.on('time until spin', handleTimeUntilSpin);
+      socketConection.on('bet results', handleBetResults);
+      socketConection.on('past Spins', handlePastSpins);
+  
+      // Cleanup listeners on unmount
+      return () => {
+        socketConection.off('bet results', handleBetResults);
+        socketConection.off('time until spin', handleTimeUntilSpin);
+        socketConection.off('past Spins', handlePastSpins);
+        socketConection.disconnect();
+      };
+   }, []);
 
    return (
     <>
        {load || betNotConnected ? (
-        <div className='h-screen w-screen flex justify-center items-center'>
-          <CircularProgress />
+        <div className='h-screen w-screen flex justify-center items-center' style={{background: "linear-gradient(187deg, rgb(34, 39, 59) 0%, #161D27 100%)"}}>
+          <NeonIcon aniName={animationNameCur}/>
         </div>
        ) : (
         <>
+          <div className='transitionElement'></div>
           <TopBar />
           <LivePlayerBar />
-          <div className='backgroundRoulette flex'>
+          <div className='backgroundRoulette flex transition-all'>
             <div className='h-full flex justify-center items-center p-10 px-5' style={{ width: "87%" }}>
               <div className='flex justify-center h-full' style={{ width: "42%" }}>
                 <PlaceBets />

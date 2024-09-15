@@ -20,7 +20,7 @@ const WithdrawPage:FC = () => {
                     <div className=" p-24 h-full w-full flex flex-col gap-16 items-center">
                      <div className=" w-full flex justify-center items-center items-center flex-col">
                       <h2 className=" text-7xl font-thin select-none" style={{color: "#06fa8a"}}>Withdraw</h2>
-                      <div className="divLineWith"></div>   
+                      <div className="divLineWith"></div>
                      </div>
                      <button onClick={() => navigate("/WithdrawEmailPage")} className="animated-button">
                       <svg className="arr-2" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="none">

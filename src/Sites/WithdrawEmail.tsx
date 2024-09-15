@@ -4,7 +4,7 @@ import NeonIcon from "../SVG/NeonSpin";
 
 const WithdrawEmailPage:FC = () => {
     return (
-        <div className="withdrawEmailBox"><NeonIcon /></div>
+        <div className="withdrawEmailBox"></div>
     );
 }
 
